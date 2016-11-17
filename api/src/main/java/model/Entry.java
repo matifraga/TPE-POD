@@ -40,7 +40,7 @@ public class Entry implements DataSerializable {
 
     @Override
     public void readData(ObjectDataInput objectDataInput) throws IOException {
-        objectDataInput.readData()
+
     }
 
     public int getEdad() {
