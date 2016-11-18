@@ -3,7 +3,7 @@ package ar.itba.edu.pod.hazel;
 import com.hazelcast.mapreduce.Reducer;
 import com.hazelcast.mapreduce.ReducerFactory;
 
-public class CountReducer implements ReducerFactory<String, Integer, Double> {
+public class MeanReducer implements ReducerFactory<String, Integer, Double> {
 
     @Override
     public Reducer<Integer, Double> newReducer(String s) {
