@@ -1,6 +1,8 @@
 # TPE - Map Reduce
 
-### How to run this?
+### How should I run this?
+
+*It's pretty easy.*
 
 In the project folder:
 ```
@@ -18,3 +20,5 @@ For the client:
 cd client/target/tpe-pod-client-1.0-SNAPSHOT/
 ./run-client.sh
 ```
+
+*See? I told you.*
