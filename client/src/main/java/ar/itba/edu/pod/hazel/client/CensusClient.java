@@ -31,7 +31,7 @@ public class CensusClient {
     public static void main(final String[] args) throws InterruptedException, ExecutionException, IOException, URISyntaxException {
 
         final String name = "52051-53214";
-        final String pass = "dev-pass";
+        final String pass = "147852";
 
         final ClientConfig ccfg = new ClientConfig();
         ccfg.getGroupConfig().setName(name).setPassword(pass);
