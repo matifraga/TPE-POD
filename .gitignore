@@ -1,6 +1,8 @@
 
 # Created by https://www.gitignore.io/api/maven,intellij,java,eclipse
 
+*.csv
+
 ### Maven ###
 target/
 pom.xml.tag

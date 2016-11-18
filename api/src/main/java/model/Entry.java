@@ -8,87 +8,92 @@ import java.io.IOException;
 
 public class Entry implements DataSerializable {
 
-    private int edad;
-    private String analfabetismo;
-    private String tipoDeVivienda;
-    private String nombreDepartamento;
-    private String nombreProvincia;
-    private String hogarId;
+    private int age;
+    private int literate;
+    private int homeType;
+    private String departmentName;
+    private String provinceName;
+    private int homeId;
 
     /*default*/ Entry() {
 
     }
 
-    public Entry(int edad, String analfabetismo, String tipoDeVivienda, String nombreDepartamento, String nombreProvincia, String hogarId) {
-        this.edad = edad;
-        this.analfabetismo = analfabetismo;
-        this.tipoDeVivienda = tipoDeVivienda;
-        this.nombreDepartamento = nombreDepartamento;
-        this.nombreProvincia = nombreProvincia;
-        this.hogarId = hogarId;
+    public Entry(int age, int literate, int homeType, String departmentName, String provinceName, int homeId) {
+        this.age = age;
+        this.literate = literate;
+        this.homeType = homeType;
+        this.departmentName = departmentName;
+        this.provinceName = provinceName;
+        this.homeId = homeId;
     }
 
     @Override
     public void writeData(ObjectDataOutput objectDataOutput) throws IOException {
-        objectDataOutput.writeInt(edad);
-        objectDataOutput.writeUTF(analfabetismo);
-        objectDataOutput.writeUTF(tipoDeVivienda);
-        objectDataOutput.writeUTF(nombreDepartamento);
-        objectDataOutput.writeUTF(nombreProvincia);
-        objectDataOutput.writeUTF(hogarId);
+        objectDataOutput.writeInt(getAge());
+        objectDataOutput.writeInt(getLiterate());
+        objectDataOutput.writeInt(getHomeType());
+        objectDataOutput.writeUTF(getDepartmentName());
+        objectDataOutput.writeUTF(getProvinceName());
+        objectDataOutput.writeInt(getHomeId());
     }
 
     @Override
     public void readData(ObjectDataInput objectDataInput) throws IOException {
-
+        setAge(objectDataInput.readInt());
+        setLiterate(objectDataInput.readInt());
+        setHomeType(objectDataInput.readInt());
+        setDepartmentName(objectDataInput.readUTF());
+        setProvinceName(objectDataInput.readUTF());
+        setHomeId(objectDataInput.readInt());
     }
 
-    public int getEdad() {
-        return edad;
+    public int getAge() {
+        return age;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setAge(int age) {
+        this.age = age;
     }
 
-    public String getAnalfabetismo() {
-        return analfabetismo;
+    public int getLiterate() {
+        return literate;
     }
 
-    public void setAnalfabetismo(String analfabetismo) {
-        this.analfabetismo = analfabetismo;
+    public void setLiterate(int literate) {
+        this.literate = literate;
     }
 
-    public String getTipoDeVivienda() {
-        return tipoDeVivienda;
+    public int getHomeType() {
+        return homeType;
     }
 
-    public void setTipoDeVivienda(String tipoDeVivienda) {
-        this.tipoDeVivienda = tipoDeVivienda;
+    public void setHomeType(int homeType) {
+        this.homeType = homeType;
     }
 
-    public String getNombreDepartamento() {
-        return nombreDepartamento;
+    public String getDepartmentName() {
+        return departmentName;
     }
 
-    public void setNombreDepartamento(String nombreDepartamento) {
-        this.nombreDepartamento = nombreDepartamento;
+    public void setDepartmentName(String departmentName) {
+        this.departmentName = departmentName;
     }
 
-    public String getNombreProvincia() {
-        return nombreProvincia;
+    public String getProvinceName() {
+        return provinceName;
     }
 
-    public void setNombreProvincia(String nombreProvincia) {
-        this.nombreProvincia = nombreProvincia;
+    public void setProvinceName(String provinceName) {
+        this.provinceName = provinceName;
     }
 
-    public String getHogarId() {
-        return hogarId;
+    public int getHomeId() {
+        return homeId;
     }
 
-    public void setHogarId(String hogarId) {
-        this.hogarId = hogarId;
+    public void setHomeId(int homeId) {
+        this.homeId = homeId;
     }
 
 }

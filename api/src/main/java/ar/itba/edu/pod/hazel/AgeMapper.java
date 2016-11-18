@@ -2,23 +2,27 @@ package ar.itba.edu.pod.hazel;
 
 import com.hazelcast.mapreduce.Context;
 import com.hazelcast.mapreduce.Mapper;
+import model.Entry;
 
 import java.util.StringTokenizer;
 
-public class AgeMapper implements Mapper<String, String, String, Integer>{
+public class AgeMapper implements Mapper<Integer, Entry, String, Integer> {
 
     private static final long serialVersionUID = -5535922778765480945L;
 
     @Override
-    public void map(final String keyinput, final String valueinput, final Context<String, Integer> context) {
-        final StringTokenizer tokenizer = new StringTokenizer(valueinput, "\n\r\t ,:;.()=><");
-        System.out.println(String.format("Key Input: %s", keyinput));
-        System.out.println(String.format("Value Input: '%s'", valueinput));
-        while (tokenizer.hasMoreTokens()) {
-            final String word = tokenizer.nextToken().toLowerCase();
+    public void map(Integer integer, Entry entry, Context<String, Integer> context) {
+        int age = entry.getAge();
+        String ageRange;
 
-            context.emit(word, 1);
-            System.out.println(String.format("Mapping (%s, 1)", word));
+        if(age < 15) {
+            ageRange = "0-14";
+        } else if (age < 65) {
+            ageRange = "15-65";
+        } else {
+            ageRange = "65-?";
         }
+
+        context.emit(ageRange, 1);
     }
 }
