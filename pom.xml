@@ -12,9 +12,11 @@
     <module>client</module>
   </modules>
   <properties>
+    <maven-eclipse-plugin.version>2.10</maven-eclipse-plugin.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <slf4j.version>1.7.12</slf4j.version>
   </properties>
+
   <dependencyManagement>
     <dependencies>
       <dependency>
@@ -32,11 +34,19 @@
     </dependencies>
   </dependencyManagement>
   <dependencies>
+
+    <!-- https://mvnrepository.com/artifact/com.hazelcast/hazelcast -->
     <dependency>
+      <groupId>com.hazelcast</groupId>
+      <artifactId>hazelcast</artifactId>
+      <version>3.7.2</version>
+    </dependency>
+
+    <!--<dependency>
       <groupId>com.hazelcast</groupId>
       <artifactId>hazelcast-all</artifactId>
       <version>3.7.2</version>
-    </dependency>
+    </dependency>-->
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
@@ -80,6 +90,15 @@
       </plugins>
     </pluginManagement>
     <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-eclipse-plugin</artifactId>
+        <version>${maven-eclipse-plugin.version}</version>
+        <configuration>
+         <downloadSources>true</downloadSources>
+         <downloadJavadocs>true</downloadJavadocs>
+        </configuration>
+      </plugin>
       <plugin>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>2.3.1</version>
