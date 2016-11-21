@@ -23,8 +23,8 @@ public class Entry implements DataSerializable {
         this.age = age;
         this.literate = literate;
         this.homeType = homeType;
-        this.departmentName = departmentName;
-        this.provinceName = provinceName;
+        this.departmentName = departmentName.trim();
+        this.provinceName = provinceName.trim();
         this.homeId = homeId;
     }
 

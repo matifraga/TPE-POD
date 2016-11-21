@@ -9,7 +9,7 @@ public class InputReader {
 
     public static void parseInput(final IMap<Integer, Entry> entryIMap, String filePath) {
         try {
-            final InputStream is = InputReader.class.getClassLoader().getResourceAsStream(filePath);
+            final InputStream is = new FileInputStream(filePath);
             final LineNumberReader reader = new LineNumberReader(new InputStreamReader(is));
             reader.readLine();
             String line;
