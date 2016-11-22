@@ -33,7 +33,7 @@ public class Client {
             final ClientConfig ccfg = new ClientConfig();
             ccfg.getGroupConfig().setName(name).setPassword(pass);
 
-            final String addresses = System.getProperty("addresses", "127.0.0.1");
+            final String addresses = System.getProperty("addresses");
 
             if (addresses != null) {
                 final String[] arrayAddresses = addresses.split("[,;]");
@@ -82,10 +82,12 @@ public class Client {
 
         final String inFilePath = System.getProperty("inPath");
 
-        final IMap<Integer, Entry> map = client.getMap(MAP_NAME);
-        logger.info("Inicio de la lectura del archivo");
-        InputReader.parseInput(map, inFilePath);
-        logger.info("Fin de lectura del archivo");
+        final IMap<Integer, Entry> map = client.getMap(MAP_NAME + inFilePath);
+        if(map.isEmpty()) {
+            logger.info("Inicio de la lectura del archivo");
+            InputReader.parseInput(map, inFilePath);
+            logger.info("Fin de lectura del archivo");
+        }
 
         final JobTracker tracker = client.getJobTracker("default");
         final KeyValueSource<Integer, Entry> source = KeyValueSource.fromMap(map);
@@ -110,10 +112,12 @@ public class Client {
 
         final String inFilePath = System.getProperty("inPath");
 
-        final IMap<Integer, Entry> map = client.getMap(MAP_NAME);
-        logger.info("Inicio de la lectura del archivo");
-        InputReader.parseInput(map, inFilePath);
-        logger.info("Fin de lectura del archivo");
+        final IMap<Integer, Entry> map = client.getMap(MAP_NAME + inFilePath);
+        if(map.isEmpty()) {
+            logger.info("Inicio de la lectura del archivo");
+            InputReader.parseInput(map, inFilePath);
+            logger.info("Fin de lectura del archivo");
+        }
 
         final JobTracker tracker = client.getJobTracker("default");
         final KeyValueSource<Integer, Entry> source = KeyValueSource.fromMap(map);
@@ -142,10 +146,12 @@ public class Client {
         final String inFilePath = System.getProperty("inPath");
         final Integer N = Integer.valueOf(System.getProperty("n"));
 
-        final IMap<Integer, Entry> map = client.getMap(MAP_NAME);
-        logger.info("Inicio de la lectura del archivo");
-        InputReader.parseInput(map, inFilePath);
-        logger.info("Fin de lectura del archivo");
+        final IMap<Integer, Entry> map = client.getMap(MAP_NAME + inFilePath);
+        if(map.isEmpty()) {
+            logger.info("Inicio de la lectura del archivo");
+            InputReader.parseInput(map, inFilePath);
+            logger.info("Fin de lectura del archivo");
+        }
 
         final JobTracker tracker = client.getJobTracker("default");
         final KeyValueSource<Integer, Entry> source = KeyValueSource.fromMap(map);
@@ -172,10 +178,12 @@ public class Client {
         final String province = System.getProperty("prov");
         final Integer tope = Integer.valueOf(System.getProperty("tope"));
 
-        final IMap<Integer, Entry> map = client.getMap(MAP_NAME);
-        logger.info("Inicio de la lectura del archivo");
-        InputReader.parseInput(map, inFilePath);
-        logger.info("Fin de lectura del archivo");
+        final IMap<Integer, Entry> map = client.getMap(MAP_NAME + inFilePath);
+        if(map.isEmpty()) {
+            logger.info("Inicio de la lectura del archivo");
+            InputReader.parseInput(map, inFilePath);
+            logger.info("Fin de lectura del archivo");
+        }
 
         final JobTracker tracker = client.getJobTracker("default");
         final KeyValueSource<Integer, Entry> source = KeyValueSource.fromMap(map);
