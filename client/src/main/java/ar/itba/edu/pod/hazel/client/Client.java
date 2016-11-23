@@ -66,6 +66,7 @@ public class Client {
                     query4(client);
                     break;
                 case 5:
+                    query5(client);
                     break;
             }
 
@@ -202,5 +203,73 @@ public class Client {
             printWriter.printf("%s = %d\n", key.getKey(), key.getValue());
         }
 
+    }
+
+    private static void query5(HazelcastInstance client) throws ExecutionException, InterruptedException {
+
+        final String inFilePath = System.getProperty("inPath");
+
+        final IMap<Integer, Entry> map = client.getMap(MAP_NAME + inFilePath);
+        if(map.isEmpty()) {
+            logger.info("Inicio de la lectura del archivo");
+            InputReader.parseInput(map, inFilePath);
+            logger.info("Fin de lectura del archivo");
+        }
+
+        final JobTracker tracker = client.getJobTracker("default");
+        final KeyValueSource<Integer, Entry> source = KeyValueSource.fromMap(map);
+        final Job<Integer, Entry> job = tracker.newJob(source);
+
+        logger.info("Inicio del trabajo map/reduce");
+        final ICompletableFuture<Map<String, Integer>>  future = job
+                .mapper(new PairMapper())
+                .reducer(new CountReducer())
+                .submit();
+
+        final Map<String,Integer> a = future.get();
+
+        final IMap<String, Integer> map2 = client.getMap(MAP_NAME + "_2");
+        map2.putAll(a);
+
+        final KeyValueSource<String, Integer> aux = KeyValueSource.fromMap(map2);
+
+        final Job<String, Integer> secondJob = tracker.newJob(aux);
+
+        final ICompletableFuture<List<Map.Entry<Integer,List<String>>>> future2 = secondJob
+                .mapper(new PairMapper2())
+                .reducer(new PairReducer())
+                .submit(new PairCollator());
+
+        final List<Map.Entry<Integer,List<String>>> a2 = future2.get();
+
+        for (Map.Entry<Integer, List<String>> entry : a2) {
+            printWriter.printf("%d\n",entry.getKey());
+            for (String s: entry.getValue()) {
+                printWriter.printf(s +"\n");
+            }
+            printWriter.printf("\n");
+        }
+        
+
+        logger.info("Fin del trabajo map/reduce");
+
+        map2.clear();
+
+    }
+
+    private Map<Integer, List<String>> func(List<Map.Entry<String, Integer>> values) {
+        Map<Integer, List<String>> aux = new HashMap<>();
+        for (Map.Entry<String, Integer> value : values) {
+            Integer v = value.getValue()/100;
+            v*=100;
+            List<String> lst;
+            if (!aux.containsKey(v)) {
+                lst = new ArrayList<>();
+            } else {
+                lst = aux.get(v);
+            }
+            lst.add(value.getKey());
+        }
+        return aux;
     }
 }

@@ -28,6 +28,7 @@ public class MeanReducer implements ReducerFactory<String, Integer, Double> {
 
             @Override
             public Double finalizeReduce() {
+                System.out.println("Finalize reduce");
                 return ((double)count/homes.size());
             }
         };

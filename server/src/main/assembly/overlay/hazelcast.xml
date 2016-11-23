@@ -48,9 +48,9 @@
             <tcp-ip enabled="true">
                 <interface>10.16.33.255</interface>
                 <member-list>
-                    <member>10.16.33.186</member>
+                    <member>10.16.33.172</member>
+                    <member>10.16.33.158</member>
                     <member>10.16.33.235</member>
-                    <member>10.16.33.180</member>
                 </member-list>
             </tcp-ip>
             <aws enabled="false">

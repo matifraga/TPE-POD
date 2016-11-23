@@ -18,6 +18,7 @@ public class AgeReducer implements ReducerFactory<String, Integer, Integer> {
 
             @Override
             public Integer finalizeReduce() {
+                System.out.println("Finalize reduce");
                 return sum;
             }
         };

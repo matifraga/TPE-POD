@@ -24,7 +24,9 @@ public class LiterateReducer implements ReducerFactory<String, Integer, Double> 
             }
 
             @Override
-            public Double finalizeReduce() { return ((double)count/total); }
+            public Double finalizeReduce() {
+                System.out.println("Finalize reduce");
+                return ((double)count/total); }
         };
     }
 }

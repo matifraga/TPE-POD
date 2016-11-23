@@ -17,7 +17,6 @@ public class CountCollator implements Collator<Map.Entry<String, Integer>, List<
     public List<Map.Entry<String, Integer>> collate(Iterable<Map.Entry<String, Integer>> values) {
         List<Map.Entry<String, Integer>> aux = new ArrayList<>();
         for (Map.Entry<String, Integer> value : values) {
-            if (value.getValue() < tope)
                 aux.add(value);
         }
         Collections.sort(aux, new IntegerComparator());
